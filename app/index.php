@@ -68,6 +68,7 @@ include '../config/DBConnect.php';
           <tr>
             <th>NRP</th>
             <th>Nama</th>
+            <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
             <th>Alamat</th>
             <th>Wali</th>
@@ -77,13 +78,14 @@ include '../config/DBConnect.php';
         </thead>
         <tbody>
           <?php
-            foreach ($db->frs_mahasiswa as $mhs) {
+            foreach ($db->frs_mahasiswa->where("is_active", "1") as $mhs) {
               echo "<tr>";
               echo "<td>".$mhs["nrp"]."</td>";
               echo "<td>".$mhs["nama_mhs"]."</td>";
+              echo "<td>".$mhs["tempat_lahir"]."</td>";
               echo "<td>".$mhs["tgl_lahir"]."</td>";
               echo "<td>".$mhs["alamat"]."</td>";
-              echo "<td>".$mhs["id_wali"]."</td>";
+              echo "<td>".$mhs["dosen_wali"]."</td>";
               echo "<td>".$mhs["spp"]."</td>";
               echo "<td>
               <button type='button' class='btn btn-sm btn-info'>Edit</button>
@@ -108,19 +110,21 @@ include '../config/DBConnect.php';
                 <input type="text" class="form-control" name="nrp" />
                 <label for="nama_mhs">Nama Mahasiswa:</label>
                 <input type="text" class="form-control" name="nama_mhs" />
+                <label for="tempat_lahir">Tempat Lahir:</label>
+                <input type="text" class="form-control" name="tempat_lahir" />
                 <label for="tgl_lahir">Tanggal Lahir:</label>
                 <input type="text" class="form-control" name="tgl_lahir" />
                 <label for="alamat">Alamat:</label>
                 <input type="text" class="form-control" name="alamat" />
-                <label for="id_wali">Dosen Wali:</label>
-                <input type="text" class="form-control" name="id_wali" />
-                <!--<select class="form-control" name="id_wali">
+                <label for="dosen_wali">Dosen Wali:</label>
+                <!-- <input type="text" class="form-control" name="dosen_wali" /> -->
+                <select class="form-control" name="dosen_wali">
                   <?php
-                    // foreach ($db->frs_dosen as $dosen) {
-                    //   echo "<option>".$dosen["nama"]."</option>";
-                    // }
+                    foreach ($db->frs_dosen as $dosen) {
+                      echo "<option>".$dosen["nama_dosen"]."</option>";
+                    }
                   ?>
-                </select>-->
+                </select>
                 <label for=spp>SPP:</label>
                 <input type="text" class="form-control" name="spp"/>
               </form>
