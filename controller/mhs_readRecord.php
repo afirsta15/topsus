@@ -7,6 +7,7 @@ $data = '
 <table class="table">
   <thead>
     <tr>
+      <th>No.</th>
       <th>NRP</th>
       <th>Nama</th>
       <th>Tempat Lahir</th>
@@ -19,9 +20,12 @@ $data = '
   </thead>
 ';
 
+$number = 0;
 foreach ($db->frs_mahasiswa->where("is_active", "".$status."") as $mhs) {
   $convertDate = date('d-m-Y', strtotime($mhs["tgl_lahir"]));
+  $number++;
   $data .= '<tbody><tr>
+  <td>'.$number.'</td>
   <td>'.$mhs["nrp"].'</td>
   <td>'.$mhs["nama_mhs"].'</td>
   <td>'.$mhs["tempat_lahir"].'</td>
