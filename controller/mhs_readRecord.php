@@ -1,5 +1,5 @@
 <?php
-include '../../config/DbConnect.php';
+include '../config/DbConnect.php' ;
 
 $data = '
 <table class="table">
@@ -27,8 +27,8 @@ foreach ($db->frs_mahasiswa->where("is_active", "1") as $mhs) {
   <td>'.$mhs["dosen_wali"].'</td>
   <td>'.$mhs["spp"].'</td>
   <td>
-    <button type="button" class="btn btn-sm btn-info">Edit</button>
-    <button type="button" class="btn btn-sm btn-danger">Delete</button>
+    <button type="button" onclick="GetMhsDetails('.$mhs["id_mhs"].')" class="btn btn-sm btn-warning">Edit</button>
+    <button type="button" onclick="DeleteMhs('.$mhs["id_mhs"].')" class="btn btn-sm btn-danger">Delete</button>
   </td>
   </tr></tbody>';
 }
