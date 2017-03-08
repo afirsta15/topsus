@@ -1,6 +1,3 @@
-<?php
-include '../config/DBConnect.php';
-?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -9,6 +6,10 @@ include '../config/DBConnect.php';
     <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+      <script src="../js/script.js"></script>
     <script>
       // $(document).ready(function(){
       //   $("form-mhs").on("submit", function(e) {
@@ -32,26 +33,34 @@ include '../config/DBConnect.php';
       //     $("#form-mhs").submit();
       //   });
       // });
-      $(document).ready(function(){
-        $("#submitForm").click(function(e){
-          e.preventDefault();
-          $.ajax({
-            type: 'POST',
-            url: 'mhsController.php',
-            data: $('#form-mhs').serialize(),
-            success: function(msg){
-              location.reload();
-              $('#form-mhs-modal .modal-header .modal-title').html("Success");
-              $('#form-mhs-modal .modal-body').html(msg);
-              $('#submitForm').hide();
-            },
-            error: function() {
-              $('#form-mhs-modal').hide();
-              alert('Error');
-            }
-          });
-        });
-      });
+      // $(document).ready(function(){
+      //
+      //   $("#submitForm").click(function(e){
+      //     e.preventDefault();
+      //     $.ajax({
+      //       type: 'POST',
+      //       url: 'mhsController.php',
+      //       data: $('#form-mhs').serialize(),
+      //       success: function(msg){
+      //         location.reload();
+      //         $('#form-mhs-modal .modal-header .modal-title').html("Success");
+      //         $('#form-mhs-modal .modal-body').html(msg);
+      //         $('#submitForm').hide();
+      //       },
+      //       error: function() {
+      //         $('#form-mhs-modal').hide();
+      //         alert('Error');
+      //       }
+      //     });
+      //   });
+      //
+      //   $(function(){
+      //     $('#datepicker').datetimepicker({
+      //       format: 'DD-MM-YYYY',
+      //       defaultDate: new Date()
+      //     });
+      //   });
+      // });
     </script>
     <title>Tugas Topik Khusus</title>
   </head>
@@ -63,39 +72,7 @@ include '../config/DBConnect.php';
       <p>
         <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#form-mhs-modal">Tambah</button>
       </p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>NRP</th>
-            <th>Nama</th>
-            <th>Tempat Lahir</th>
-            <th>Tanggal Lahir</th>
-            <th>Alamat</th>
-            <th>Wali</th>
-            <th>SPP</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-            foreach ($db->frs_mahasiswa->where("is_active", "1") as $mhs) {
-              echo "<tr>";
-              echo "<td>".$mhs["nrp"]."</td>";
-              echo "<td>".$mhs["nama_mhs"]."</td>";
-              echo "<td>".$mhs["tempat_lahir"]."</td>";
-              echo "<td>".$mhs["tgl_lahir"]."</td>";
-              echo "<td>".$mhs["alamat"]."</td>";
-              echo "<td>".$mhs["dosen_wali"]."</td>";
-              echo "<td>".$mhs["spp"]."</td>";
-              echo "<td>
-              <button type='button' class='btn btn-sm btn-info'>Edit</button>
-              <button type='button' class='btn btn-sm btn-danger'>Delete</button>
-              </td>";
-              echo "</tr>";
-            }
-          ?>
-        </tbody>
-      </table>
+      <div class="records"></div>
       <!-- Form MHS Modal -->
       <div class="modal fade" id="form-mhs-modal" role="dialog">
         <div class="modal-dialog">
@@ -113,7 +90,7 @@ include '../config/DBConnect.php';
                 <label for="tempat_lahir">Tempat Lahir:</label>
                 <input type="text" class="form-control" name="tempat_lahir" />
                 <label for="tgl_lahir">Tanggal Lahir:</label>
-                <input type="text" class="form-control" name="tgl_lahir" />
+                <input type="text" class="form-control" name="tgl_lahir" id="datepicker" />
                 <label for="alamat">Alamat:</label>
                 <input type="text" class="form-control" name="alamat" />
                 <label for="dosen_wali">Dosen Wali:</label>
