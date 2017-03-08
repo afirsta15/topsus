@@ -63,6 +63,39 @@ function GetMhsDetails(id) {
   $("#edit-form-mhs-modal").modal("show");
 }
 
+function UpdateMhsDetails() {
+    // get values
+    var nrp = $("#edit_nrp").val();
+    var nama_mhs = $("#edit_nama_mhs").val();
+    var tempat_lahir = $("#edit_tempat_lahir").val();
+    var datepicker = $("#edit_datepicker").val();
+    var alamat = $("#edit_alamat").val();
+    var dosen_wali = $("#edit_dosen_wali").val();
+    var spp = $("#edit_spp").val();
+
+    // get hidden field value
+    var id_mhs = $("#user_id").val();
+
+    // Update the details by requesting to the server using ajax
+    $.post("../controller/mhs_updateMhsDetails.php", {
+            id_mhs: id_mhs,
+            nrp: nrp,
+            nama_mhs: nama_mhs,
+            tempat_lahir: tempat_lahir,
+            datepicker: datepicker,
+            alamat: alamat,
+            dosen_wali: dosen_wali,
+            spp: spp
+        },
+        function (data, status) {
+            // hide modal popup
+            $("#edit-form-mhs-modal").modal("hide");
+            // reload Users by using readRecords();
+            readRecords();
+        }
+    );
+}
+
 
 $(document).ready(function () {
     // READ recods on page load

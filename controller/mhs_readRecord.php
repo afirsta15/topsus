@@ -1,6 +1,8 @@
 <?php
 include '../config/DbConnect.php' ;
 
+$status = 1;
+
 $data = '
 <table class="table">
   <thead>
@@ -17,12 +19,13 @@ $data = '
   </thead>
 ';
 
-foreach ($db->frs_mahasiswa->where("is_active", "1") as $mhs) {
+foreach ($db->frs_mahasiswa->where("is_active", "".$status."") as $mhs) {
+  $convertDate = date('d-m-Y', strtotime($mhs["tgl_lahir"]));
   $data .= '<tbody><tr>
   <td>'.$mhs["nrp"].'</td>
   <td>'.$mhs["nama_mhs"].'</td>
   <td>'.$mhs["tempat_lahir"].'</td>
-  <td>'.$mhs["tgl_lahir"].'</td>
+  <td>'.$convertDate.'</td>
   <td>'.$mhs["alamat"].'</td>
   <td>'.$mhs["dosen_wali"].'</td>
   <td>'.$mhs["spp"].'</td>
