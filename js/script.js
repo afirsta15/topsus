@@ -44,7 +44,7 @@ function readRecords() {
 function GetMhsDetails(id) {
   $("#user_id").val(id);
   $.post("../controller/mhs_getMhsDetails.php", {
-          user_id: id
+          id_mhs: id
       },
       function (data, status) {
           // PARSE json data
@@ -94,6 +94,20 @@ function UpdateMhsDetails() {
             readRecords();
         }
     );
+}
+
+function DeleteMhs(id) {
+    var conf = confirm("Apakah Anda yakin ingin menghapus data mahasiswa ini ?");
+    if (conf == true) {
+        $.post("../controller/mhs_deleteMhs.php", {
+                id_mhs: id
+            },
+            function (data, status) {
+                // reload Users by using readRecords();
+                readRecords();
+            }
+        );
+    }
 }
 
 
