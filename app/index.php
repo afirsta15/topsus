@@ -17,9 +17,15 @@
       <div class="page-header">
         <h1>Data Mahasiswa</h1>
       </div>
-      <p>
-        <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-mhs-modal">Tambah</button>
-      </p>
+      <form class="form-inline">
+        <div class="form-group">
+          <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-mhs-modal">Tambah</button>
+        </div>
+        <div class="form-group pull-right">
+          <input type="text" class="form-control pull-right" id="recordFilter" onkeyup="filterRecord()" placeholder="Cari Nama . . . " />
+        </div>
+      </form>
+
       <div class="records"></div>
 
 

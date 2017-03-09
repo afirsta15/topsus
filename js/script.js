@@ -19,20 +19,26 @@ function addRecord() {
         dosen_wali: dosen_wali,
         spp: spp
     }, function (data, status) {
-        // close the popup
-        $("#add-form-mhs-modal").modal("hide");
+        if (data == 0) {
+          // close the popup
+          //$("#add-form-mhs-modal").modal("hide");
+          alert("Mahasiswa dengan NRP : "+nrp+" sudah ada!");
+          readRecords();
+        } else {
+          // close the popup
+          $("#add-form-mhs-modal").modal("hide");
+          // read records again
+          readRecords();
 
-        // read records again
-        readRecords();
-
-        // clear fields from the popup
-        $("#nrp").val("");
-        $("#nama_mhs").val("");
-        $("#tempat_lahir").val("");
-        $("#datepicker").val(new Date());
-        $("#alamat").val("");
-        $("#dosen_wali").val("");
-        $("#spp").val("");
+          // clear fields from the popup
+          $("#nrp").val("");
+          $("#nama_mhs").val("");
+          $("#tempat_lahir").val("");
+          $("#datepicker").val(new Date());
+          $("#alamat").val("");
+          $("#dosen_wali").val("");
+          $("#spp").val("");
+        }
     });
 }
 function readRecords() {
@@ -108,6 +114,27 @@ function DeleteMhs(id) {
             }
         );
     }
+}
+
+function filterRecord() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("recordFilter");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("records");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 }
 
 

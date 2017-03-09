@@ -10,16 +10,22 @@ $alamat = $_POST['alamat'];
 $dosen_wali = $_POST['dosen_wali'];
 $spp = $_POST['spp'];
 
-$data = array(
-  'nrp' => $nrp,
-  'nama_mhs' => $nama_mhs,
-  'tempat_lahir' => $tempat_lahir,
-  'tgl_lahir' => $tgl_lahir,
-  'alamat' => $alamat,
-  'dosen_wali' => $dosen_wali,
-  'spp' => $spp
-);
+$check = $db->frs_mahasiswa->where("nrp", $nrp);
 
-$db->frs_mahasiswa->insert($data);
-echo $nama_mhs . "added!";
+if($check->fetch()) {
+  echo 0;
+} else {
+  $data = array(
+    'nrp' => $nrp,
+    'nama_mhs' => $nama_mhs,
+    'tempat_lahir' => $tempat_lahir,
+    'tgl_lahir' => $tgl_lahir,
+    'alamat' => $alamat,
+    'dosen_wali' => $dosen_wali,
+    'spp' => $spp
+  );
+  $db->frs_mahasiswa->insert($data);
+  echo 1;
+}
+
 ?>
