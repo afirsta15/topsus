@@ -16,7 +16,8 @@ $data = array(
   'nama_dosen' => $nama_dosen,
   // 'tempat_lahir' => $tempat_lahir,
   // 'tgl_lahir' => $tgl_lahir,
-  'alamat' => $alamat
+  'alamat' => $alamat,
+  'is_edit' => 0
   // 'dosen_wali' => $dosen_wali,
   // 'spp' => $spp
 );

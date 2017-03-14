@@ -18,7 +18,8 @@ $data = array(
   'tgl_lahir' => $tgl_lahir,
   'alamat' => $alamat,
   'dosen_wali' => $dosen_wali,
-  'spp' => $spp
+  'spp' => $spp,
+  'is_edit' => 0
 );
 $mhs = $db->frs_mahasiswa->where("id_mhs", "".$id_mhs."");
 if($mhs->fetch()){
