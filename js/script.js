@@ -48,6 +48,7 @@ function readRecords() {
 }
 
 function GetMhsDetails(id) {
+  StopInterval();
   $("#user_id").val(id);
   $.post("../controller/mhs_getMhsDetails.php", {
           id_mhs: id
@@ -55,6 +56,7 @@ function GetMhsDetails(id) {
       function (data, status) {
           if(data == 1) {
             alert("Data Sedang di Sunting!");
+            StartInterval();
           } else {
             // PARSE json data
             var user = JSON.parse(data);
@@ -103,6 +105,7 @@ function UpdateMhsDetails() {
             $("#edit-form-mhs-modal").modal("hide");
             // reload Users by using readRecords();
             readRecords();
+            StartInterval();
         }
     );
 }
@@ -143,6 +146,7 @@ function filterRecord() {
 }
 
 function ResetIsEdit() {
+    StartInterval();
     // get values
     var id = $("#user_id").val();
 
@@ -159,8 +163,22 @@ function ResetIsEdit() {
     );
 }
 
+function StartInterval() {
+  interval = setInterval(function() {
+      console.log("reload");
+      $('#records')}, 5000);
+}
+
+function StopInterval() {
+  clearInterval(interval);
+  console.log("Interval should be stoped");
+}
+
+var interval = null;
+
 
 $(document).ready(function () {
+    StartInterval();
     // READ recods on page load
     readRecords(); // calling function
 

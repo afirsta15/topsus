@@ -48,7 +48,7 @@ function readRecords() {
 }
 
 function GetDosenDetails(id) {
-  var is_reload = 0;
+  StopInterval();
   $("#user_id").val(id);
   $.post("../controller/dosen_getDosenDetails.php", {
           id_dosen: id
@@ -56,6 +56,7 @@ function GetDosenDetails(id) {
       function (data, status) {
           if(data == 1) {
             alert("Data Sedang di Sunting!");
+            StartInterval();
           } else {
             // PARSE json data
             var user = JSON.parse(data);
@@ -105,6 +106,7 @@ function UpdateDosenDetails() {
             $("#edit-form-dosen-modal").modal("hide");
             // reload Users by using readRecords();
             readRecords();
+            StartInterval();
         }
     );
 }
@@ -145,6 +147,7 @@ function filterRecord() {
 }
 
 function ResetIsEdit() {
+    StartInterval();
     // get values
     var id = $("#user_id").val();
 
@@ -161,13 +164,23 @@ function ResetIsEdit() {
     );
 }
 
-var is_reload = 1;
-console.log(is_reload);
+function StartInterval() {
+  interval = setInterval(function() {
+      console.log("reload");
+      $('#records_dosen')}, 5000);
+}
+
+function StopInterval() {
+  clearInterval(interval);
+  console.log("Interval should be stoped");
+}
+
+var interval = null;
 
 $(document).ready(function () {
+    StartInterval();
     // READ recods on page load
     readRecords(); // calling function
-
     $(function(){
       $('#datepicker').datetimepicker({
         format: 'DD-MM-YYYY',
@@ -181,11 +194,5 @@ $(document).ready(function () {
         //defaultDate: new Date()
       });
     });
-
-    if (is_reload == 1) {
-      setInterval(function() {
-        console.log("reload");
-        $('#records_dosen')}, 5000);
-    }
 
 });
