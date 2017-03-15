@@ -165,6 +165,7 @@ function ResetIsEdit() {
 
 function StartInterval() {
   interval = setInterval(function() {
+      readRecords();
       console.log("reload");
       $('#records')}, 5000);
 }
