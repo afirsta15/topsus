@@ -17,7 +17,7 @@ $data = array(
   // 'tempat_lahir' => $tempat_lahir,
   // 'tgl_lahir' => $tgl_lahir,
   'alamat' => $alamat,
-  'is_edit' => 0
+  'is_edit' => '0'
   // 'dosen_wali' => $dosen_wali,
   // 'spp' => $spp
 );

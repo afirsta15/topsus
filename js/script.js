@@ -68,7 +68,7 @@ function GetMhsDetails(id) {
             $("#edit_spp").val(user[0].spp);
 
             // Open modal popup
-            $("#edit-form-mhs-modal").modal("show"); 
+            $("#edit-form-mhs-modal").modal("show");
           }
       }
   );
@@ -140,6 +140,23 @@ function filterRecord() {
       }
     }
   }
+}
+
+function ResetIsEdit() {
+    // get values
+    var id = $("#user_id").val();
+
+    // Update the details by requesting to the server using ajax
+    $.post("../controller/mhs_resetIsEdit.php", {
+            id_mhs : id
+        },
+        function (data, status) {
+            // hide modal popup
+            $("#edit-form-mhs-modal").modal("hide");
+            // reload Users by using readRecords();
+            readRecords();
+        }
+    );
 }
 
 

@@ -13,7 +13,35 @@
     <title>Tugas Topik Khusus</title>
   </head>
   <body>
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">FRS Online</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="../app/index.php">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="../app/index.php">Master Mahasiswa</a></li>
+                <li><a href="../app/dosen_view.php">Master Dosen</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="container theme-showcase" role="main">
       <div class="page-header">
         <h1>Data Mahasiswa</h1>
       </div>
@@ -32,7 +60,7 @@
     </div>
 
     <!-- Add Form MHS Modal -->
-    <div class="modal fade" id="add-form-mhs-modal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="add-form-mhs-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -84,7 +112,7 @@
     </div>
 
     <!-- Edit Form Mhs Modal -->
-    <div class="modal fade" id="edit-form-mhs-modal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="edit-form-mhs-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -128,7 +156,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetIsEdit()">Batal</button>
             <button type="button" class="btn btn-success" onclick="UpdateMhsDetails()">Update</button>
             <input type="hidden" id="user_id" />
           </div>

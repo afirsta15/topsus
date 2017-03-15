@@ -48,6 +48,7 @@ function readRecords() {
 }
 
 function GetDosenDetails(id) {
+  var is_reload = 0;
   $("#user_id").val(id);
   $.post("../controller/dosen_getDosenDetails.php", {
           id_dosen: id
@@ -127,7 +128,7 @@ function filterRecord() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("recordFilter");
   filter = input.value.toUpperCase();
-  table = document.getElementById("records");
+  table = document.getElementById("records_dosen");
   tr = table.getElementsByTagName("tr");
 
   // Loop through all table rows, and hide those who don't match the search query
@@ -143,6 +144,25 @@ function filterRecord() {
   }
 }
 
+function ResetIsEdit() {
+    // get values
+    var id = $("#user_id").val();
+
+    // Update the details by requesting to the server using ajax
+    $.post("../controller/dosen_resetIsEdit.php", {
+            id_dosen : id
+        },
+        function (data, status) {
+            // hide modal popup
+            $("#edit-form-dosen-modal").modal("hide");
+            // reload Users by using readRecords();
+            readRecords();
+        }
+    );
+}
+
+var is_reload = 1;
+console.log(is_reload);
 
 $(document).ready(function () {
     // READ recods on page load
@@ -162,5 +182,10 @@ $(document).ready(function () {
       });
     });
 
+    if (is_reload == 1) {
+      setInterval(function() {
+        console.log("reload");
+        $('#records_dosen')}, 5000);
+    }
 
 });
