@@ -178,10 +178,46 @@ function StopInterval() {
 
 var interval = null;
 
+function checkNIP() {
+  $('#nip').bind('input propertychange', function() {
+    var nip = $('#nip').val();
+    console.log(nip);
+    $.post("../controller/dosen_isExist.php", {
+            nip : nip
+        },
+        function (data, status) {
+            console.log("Data : " + data);
+            if(data == 0) {
+              alert("Dosen dengan NIP : "+nip+" sudah ada!");
+              $('#nip').val('');
+            }
+        }
+    );
+  });
+}
+
+function doubleCheckNIP() {
+  var nip = $('#nip').val();
+  console.log(nip);
+  $.post("../controller/dosen_isExist.php", {
+          nip : nip
+      },
+      function (data, status) {
+          console.log("Data : " + data);
+          if(data == 0) {
+            alert("Dosen dengan NIP : "+nip+" sudah ada!");
+            $('#nip').val('');
+          }
+      }
+  );
+}
+
 $(document).ready(function () {
     StartInterval();
     // READ recods on page load
     readRecords(); // calling function
+    checkNIP();
+
     $(function(){
       $('#datepicker').datetimepicker({
         format: 'DD-MM-YYYY',

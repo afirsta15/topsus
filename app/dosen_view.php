@@ -73,7 +73,7 @@
             </div>
             <div class="form-group">
               <label for="nama_dosen">Nama Dosen:</label>
-              <input type="text" class="form-control" name="nama_dosen" id="nama_dosen" />
+              <input type="text" class="form-control" name="nama_dosen" id="nama_dosen" onclick="doubleCheckNIP()" />
             </div>
             <!-- <div class="form-group">
               <label for="tempat_lahir">Tempat Lahir:</label>
@@ -85,7 +85,7 @@
             </div> -->
             <div class="form-group">
               <label for="alamat">Alamat:</label>
-              <input type="text" class="form-control" name="alamat" id="alamat" />
+              <input type="text" class="form-control" name="alamat" id="alamat" onclick="doubleCheckNIP()" />
             </div>
             <!-- <div class="form-group">
               <label for="dosen_wali">Dosen Wali:</label>
@@ -115,7 +115,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" onclick="ResetIsEdit()" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Update Data Dosen</h4>
           </div>
           <div class="modal-body">

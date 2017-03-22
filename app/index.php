@@ -74,23 +74,23 @@
             </div>
             <div class="form-group">
               <label for="nama_mhs">Nama Mahasiswa:</label>
-              <input type="text" class="form-control" name="nama_mhs" id="nama_mhs" />
+              <input type="text" class="form-control" name="nama_mhs" id="nama_mhs" onclick="doubleCheckNRP()" />
             </div>
             <div class="form-group">
               <label for="tempat_lahir">Tempat Lahir:</label>
-              <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" />
+              <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" onclick="doubleCheckNRP()" />
             </div>
             <div class="form-group">
               <label for="tgl_lahir">Tanggal Lahir:</label>
-              <input type="text" class="form-control" name="tgl_lahir" id="datepicker" />
+              <input type="text" class="form-control" name="tgl_lahir" id="datepicker" onclick="doubleCheckNRP()" />
             </div>
             <div class="form-group">
               <label for="alamat">Alamat:</label>
-              <input type="text" class="form-control" name="alamat" id="alamat" />
+              <input type="text" class="form-control" name="alamat" id="alamat" onclick="doubleCheckNRP()" />
             </div>
             <div class="form-group">
               <label for="dosen_wali">Dosen Wali:</label>
-              <select class="form-control" name="dosen_wali" id="dosen_wali">
+              <select class="form-control" name="dosen_wali" id="dosen_wali" onclick="doubleCheckNRP()">
                 <?php
                   foreach ($db->frs_dosen as $dosen) {
                     echo "<option>".$dosen["nama_dosen"]."</option>";
@@ -100,7 +100,7 @@
             </div>
             <div class="form-group">
               <label for=spp>SPP:</label>
-              <input type="text" class="form-control" name="spp" id="spp"/>
+              <input type="text" class="form-control" name="spp" id="spp" onclick="doubleCheckNRP()"/>
             </div>
           </div>
           <div class="modal-footer">
@@ -116,7 +116,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" onclick="ResetIsEdit()">&times;</button>
             <h4 class="modal-title">Update Data Mahasiswa</h4>
           </div>
           <div class="modal-body">

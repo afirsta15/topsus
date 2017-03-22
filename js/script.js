@@ -177,11 +177,46 @@ function StopInterval() {
 
 var interval = null;
 
+function checkNRP() {
+  $('#nrp').bind('input propertychange', function() {
+    var nrp = $('#nrp').val();
+    console.log(nrp);
+    $.post("../controller/mhs_isExist.php", {
+            nrp : nrp
+        },
+        function (data, status) {
+            console.log("Data : " + data);
+            if(data == 0) {
+              alert("Mahasiswa dengan NRP : "+nrp+" sudah ada!");
+              $('#nrp').val('');
+            }
+        }
+    );
+  });
+}
+
+function doubleCheckNRP() {
+  var nrp = $('#nrp').val();
+  console.log(nrp);
+  $.post("../controller/mhs_isExist.php", {
+          nrp : nrp
+      },
+      function (data, status) {
+          console.log("Data : " + data);
+          if(data == 0) {
+            alert("Mahasiswa dengan NRP : "+nrp+" sudah ada!");
+            $('#nrp').val('');
+          }
+      }
+  );
+}
+
 
 $(document).ready(function () {
     StartInterval();
     // READ recods on page load
     readRecords(); // calling function
+    checkNRP();
 
     $(function(){
       $('#datepicker').datetimepicker({
