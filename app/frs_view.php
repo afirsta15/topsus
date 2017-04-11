@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-    <title>Tugas Topik Khusus | Mata Kuliah</title>
+    <title>Tugas Topik Khusus | Formulir Rencana Studi</title>
   </head>
   <body>
     <!-- Navbar -->
@@ -27,8 +27,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="../app/index.php">Home</a></li>
-            <li><a href="../app/frs_view.php">FRS</a></li>
+            <li><a href="../app/index.php">Home</a></li>
+            <li class="active"><a href="../app/frs_view.php">FRS</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -44,24 +44,35 @@
 
     <div class="container">
       <div class="page-header">
-        <h1>Data Mata Kuliah</h1>
+        <h1>Data KRSM</h1>
       </div>
       <form class="form-inline">
         <div class="form-group">
-          <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-matkul-modal">Tambah</button>
+          <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-frs-modal">Tambah</button>
         </div>
         <div class="form-group pull-right">
-          <input type="text" class="form-control pull-right" id="recordFilter" onkeyup="filterRecord()" placeholder="Cari Nama . . . " />
+          <label for="tajar">Tahun Ajar : </label>
+          <select class="form-control" name="tajar" id="tajar">
+            <?php
+              foreach ($db->frs_tajar as $tajar) {
+                echo "<option>".$tajar["nama_tajar"]."</option>";
+              }
+            ?>
+          </select>
         </div>
       </form>
 
-      <div class="records_matkul"></div>
+      <div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8 records_matkul"></div>
+        <div class="col-md-2"></div>
+      </div>
 
 
     </div>
 
     <!-- Add Form MHS Modal -->
-    <div class="modal fade" id="add-form-matkul-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal fade" id="add-form-frs-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -123,6 +134,6 @@
 
 
 
-    <script src="../js/script-matkul.js"></script>
+    <script src="../js/script-frs.js"></script>
   </body>
 </html>
