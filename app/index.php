@@ -35,6 +35,7 @@
                 <li><a href="../app/index.php">Master Mahasiswa</a></li>
                 <li><a href="../app/dosen_view.php">Master Dosen</a></li>
                 <li><a href="../app/matkul_view.php">Master Mata Kuliah</a></li>
+                <li><a href="../app/tajar_view.php">Master Tahun Ajar</a></li>
               </ul>
             </li>
           </ul>

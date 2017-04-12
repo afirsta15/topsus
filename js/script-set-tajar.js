@@ -32,6 +32,8 @@ function addRecord() {
         }
     });
 }
+
+
 function readRecords() {
     $.get("../controller/tajar_readRecord.php", {}, function (data, status) {
         $(".select_tajar").html(data);

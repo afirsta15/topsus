@@ -1,4 +1,7 @@
-<?php include '../config/DbConnect.php'; ?>
+<?php include '../config/DbConnect.php';
+$aktif = $db->frs_tajar->where("is_active", "1")->fetch();
+$mhs = $db->frs_mahasiswa->where("is_active", "1");
+?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -35,6 +38,7 @@
                 <li><a href="../app/index.php">Master Mahasiswa</a></li>
                 <li><a href="../app/dosen_view.php">Master Dosen</a></li>
                 <li><a href="../app/matkul_view.php">Master Mata Kuliah</a></li>
+                <li><a href="../app/tajar_view.php">Master Tahun Ajar</a></li>
               </ul>
             </li>
           </ul>
@@ -46,27 +50,35 @@
       <div class="page-header">
         <h1>Data KRSM</h1>
       </div>
-      <form class="form-inline">
-        <div class="form-group">
-          <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-frs-modal">Tambah</button>
-        </div>
-        <div class="form-group pull-right">
-          <label for="tajar">Tahun Ajar : </label>
-          <select class="form-control" name="tajar" id="tajar">
-            <?php
-              foreach ($db->frs_tajar as $tajar) {
-                echo "<option>".$tajar["nama_tajar"]."</option>";
-              }
-            ?>
-          </select>
-        </div>
-      </form>
 
       <div>
         <div class="col-md-2"></div>
-        <div class="col-md-8 records_matkul"></div>
+        <div class="col-md-8">
+          <div class="pull-left">
+            <form class="form-inline">
+              <div class="form-group">
+                <select class="form-control" name="select-mhs" id="select-mhs" style="width:300px">
+                  <?php
+                    foreach ($mhs as $m) {
+                      echo "<option>".$m["nrp"]." - ".$m["nama_mhs"]."</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <button type="button" class="btn btn-success" onclick="readRecords()">Pilih</button>
+            </form>
+          </div>
+          <div class="pull-right">
+            <label for="tajar">Tahun Ajar Aktif : <?php echo $aktif["nama_tajar"]; ?></label>
+          </div>
+          <div>
+            <div class="records_frs" style="margin-top:50px; margin-bottom:50px;"></div>
+          </div>
+        </div>
         <div class="col-md-2"></div>
       </div>
+
+
 
 
     </div>
