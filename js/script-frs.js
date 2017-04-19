@@ -29,6 +29,52 @@ function readRecords() {
   });
 }
 
+function cetakFrs(id) {
+  var doc = new jsPDF();
+  var header = "Formulir Rencana Studi";
+  var nama_mhs = $("#nama-mhs").html();
+  var jml_sks = $("#jml-sks").html();
+  var tajar = $("#tajar").html();
+  var sks = jml_sks.split(" ");
+  var tj = tajar.split(" ");
+  doc.text(header, 75, 30);
+  doc.setFontSize(8);
+  var nm = doc.splitTextToSize(nama_mhs);
+  doc.text("Nama Mahasiswa", 83, 40);
+  doc.text(":", 108, 40);
+  doc.text(nm, 110, 40);
+  doc.text("Jumlah SKS", 83, 45);
+  doc.text(":", 108, 45);
+  doc.text(sks[3] + " SKS", 110, 45);
+  doc.text("Tahun Ajar", 83, 50);
+  doc.text(":", 108, 50);
+  doc.text(tj[4], 110, 50);
+  //doc.text(jml_sks, 155, 40);
+  var elem = document.getElementById("records_matkul");
+  var clone = elem.cloneNode(true);
+  $(clone).attr("id", "clone")
+  document.getElementById("table-holder").appendChild(clone);
+  $('#clone tr').find('th:last-child, td:last-child').remove();
+
+
+  // Print to PDF
+  var res = doc.autoTableHtmlToJson(clone);
+  doc.autoTable(res.columns, res.data, {
+    startY: 55,
+    tableWidth: 100,
+    margin: 55,
+    styles: {
+      cellPadding: 1.0,
+      fontSize: 10,
+      halign: 'center',
+      valign: 'middle',
+      columnWidth: 'auto'
+    }
+  });
+  doc.save('table.pdf');
+  clone.remove();
+}
+
 function DeleteFrs(id) {
     var conf = confirm("Apakah Anda yakin ingin membatalakan mata kuliah ini ?");
     if (conf == true) {

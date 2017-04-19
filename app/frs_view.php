@@ -69,83 +69,20 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
             </form>
           </div>
           <div class="pull-right">
-            <label for="tajar">Tahun Ajar Aktif : <?php echo $aktif["nama_tajar"]; ?></label>
+            <label for="tajar" id="tajar">Tahun Ajar Aktif : <?php echo $aktif["nama_tajar"]; ?></label>
           </div>
-          <div>
+          <div id="table-holder">
             <div class="records_frs" style="margin-top:50px; margin-bottom:50px;"></div>
           </div>
         </div>
         <div class="col-md-2"></div>
       </div>
-
-
-
-
-    </div>
-
-    <!-- Add Form MHS Modal -->
-    <div class="modal fade" id="add-form-frs-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Tambah Mata Kuliah</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="kode_matkul">Kode Mata Kuliah:</label>
-              <input type="text" class="form-control" name="kode_matkul" id="kode_matkul" />
-            </div>
-            <div class="form-group">
-              <label for="nama_matkul">Nama Mata Kuliah:</label>
-              <input type="text" class="form-control" name="nama_matkul" id="nama_matkul" onclick="doubleCheckKODE()" />
-            </div>
-            <div class="form-group">
-              <label for="jml_sks">Jumlah SKS:</label>
-              <input type="number" class="form-control" name="jml_sks" id="jml_sks" onclick="doubleCheckKODE()" />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-success" onclick="addRecord()">Tambah</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Edit Form Mhs Modal -->
-    <div class="modal fade" id="edit-form-matkul-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="ResetIsEdit()" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Update Data Mata Kuliah</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="kode_matkul">Kode Mata Kuliah:</label>
-              <input type="text" class="form-control" name="edit_kode_matkul" id="edit_kode_matkul" />
-            </div>
-            <div class="form-group">
-              <label for="nama_matkul">Nama Mata Kuliah:</label>
-              <input type="text" class="form-control" name="edit_nama_matkul" id="edit_nama_matkul" />
-            </div>
-            <div class="form-group">
-              <label for="jml_sks">Jumlah SKS:</label>
-              <input type="text" class="form-control" name="edit_jml_sks" id="edit_jml_sks" />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetIsEdit()">Batal</button>
-            <button type="button" class="btn btn-success" onclick="UpdateMatkulDetails()">Update</button>
-            <input type="hidden" id="id_matkul" />
-          </div>
-        </div>
-      </div>
     </div>
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js"></script>
     <script src="../js/script-frs.js"></script>
   </body>
 </html>
