@@ -29,6 +29,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="../app/index.php">Home</a></li>
             <li><a href="../app/frs_view.php">FRS</a></li>
+            <li><a href="../app/transkrip_view.php">Transkrip</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data <span class="caret"></span></a>
               <ul class="dropdown-menu">

@@ -31,8 +31,8 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="../app/index.php">Home</a></li>
-            <li class="active"><a href="../app/frs_view.php">FRS</a></li>
-            <li><a href="../app/transkrip_view.php">Transkrip</a></li>
+            <li><a href="../app/frs_view.php">FRS</a></li>
+            <li class="active"><a href="../app/transkrip_view.php">Transkrip</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -49,7 +49,7 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
 
     <div class="container">
       <div class="page-header">
-        <h1>Data KRSM</h1>
+        <h1>Transkrip</h1>
       </div>
 
       <div>
@@ -69,11 +69,8 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
               <button type="button" class="btn btn-success" onclick="readRecords()">Pilih</button>
             </form>
           </div>
-          <div class="pull-right">
-            <label for="tajar" id="tajar">Tahun Ajar Aktif : <?php echo $aktif["nama_tajar"]; ?></label>
-          </div>
           <div id="table-holder">
-            <div class="records_frs" style="margin-top:50px; margin-bottom:50px;"></div>
+            <div class="records_transkrip" style="margin-top:50px; margin-bottom:50px;"></div>
           </div>
         </div>
         <div class="col-md-2"></div>
@@ -84,6 +81,6 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js"></script>
-    <script src="../js/script-frs.js"></script>
+    <script src="../js/script-transkrip.js"></script>
   </body>
 </html>

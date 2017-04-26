@@ -14,6 +14,9 @@ function addRecord() {
           //$("#add-form-mhs-modal").modal("hide");
           alert("Mata Kuliah dengan Kode : "+add_matkul+" sudah ada dalam KRS!");
           readRecords();
+        } else if (data == 1) {
+          alert("Anda mengulang mata kuliah dengan kode : "+add_matkul);
+          readRecords();
         } else {
           // read records again
           readRecords();
@@ -27,6 +30,20 @@ function readRecords() {
   }, function (data, status) {
         $(".records_frs").html(data);
   });
+}
+
+function DeleteFrs(id) {
+    var conf = confirm("Apakah Anda yakin ingin membatalakan mata kuliah ini ?");
+    if (conf == true) {
+        $.post("../controller/frs_deleteMatkul.php", {
+                id_frs : id
+            },
+            function (data, status) {
+                // reload Users by using readRecords();
+                readRecords();
+            }
+        );
+    }
 }
 
 function cetakFrs(id) {
@@ -73,20 +90,6 @@ function cetakFrs(id) {
   });
   doc.save('table.pdf');
   clone.remove();
-}
-
-function DeleteFrs(id) {
-    var conf = confirm("Apakah Anda yakin ingin membatalakan mata kuliah ini ?");
-    if (conf == true) {
-        $.post("../controller/frs_deleteMatkul.php", {
-                id_frs : id
-            },
-            function (data, status) {
-                // reload Users by using readRecords();
-                readRecords();
-            }
-        );
-    }
 }
 
 function StartInterval() {
