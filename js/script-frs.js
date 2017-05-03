@@ -14,10 +14,10 @@ function addRecord() {
           //$("#add-form-mhs-modal").modal("hide");
           alert("Mata Kuliah dengan Kode : "+add_matkul+" sudah ada dalam KRS!");
           readRecords();
-        } else if (data == 1) {
+        }  /* else if (data == 1) {
           alert("Anda mengulang mata kuliah dengan kode : "+add_matkul);
           readRecords();
-        } else {
+        }*/ else {
           // read records again
           readRecords();
         }

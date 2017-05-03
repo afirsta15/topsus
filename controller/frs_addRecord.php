@@ -12,24 +12,26 @@ $id_tajar = $db->frs_tajar->where("is_active", "1")->fetch();
 $check = $db->frs_frs_mhs->where("id_tajar", $id_tajar["id_tajar"])->where("id_mhs", $id_mhs["id_mhs"])->where("id_matkul", $id_matkul["id_matkul"]);
 
 // Update matkul when user already take this matkul
-$update = $db->frs_frs_mhs->where("id_mhs", $id_mhs["id_mhs"])->where("id_matkul", $id_matkul["id_matkul"]);
+// $update = $db->frs_frs_mhs->where("id_mhs", $id_mhs["id_mhs"])->where("id_matkul", $id_matkul["id_matkul"]);
 
 if($check->fetch()) {
   echo 0;
-} elseif($update->fetch()) {
-  $data_update = array(
-    'id_tajar' => $id_tajar["id_tajar"]
-  );
-  $update->update($data_update);
-  echo 1;
-} else {
+}
+// elseif($update->fetch()) {
+//   $data_update = array(
+//     'id_tajar' => $id_tajar["id_tajar"]
+//   );
+//   $update->update($data_update);
+//   echo 1;
+// }
+else {
   $data = array(
     'id_tajar' => $id_tajar["id_tajar"],
     'id_mhs' => $id_mhs["id_mhs"],
     'id_matkul' => $id_matkul["id_matkul"]
   );
   $db->frs_frs_mhs->insert($data);
-  echo 2;
+  echo 1;
 }
 
 ?>

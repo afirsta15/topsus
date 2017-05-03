@@ -14,6 +14,7 @@ $data = '
       <th>Kode</th>
       <th>Nama</th>
       <th>Jumlah SKS</th>
+      <th>Tahun Ajar</th>
     </tr>
   </thead>
 ';
@@ -26,17 +27,19 @@ $rows = count($db->frs_frs_mhs());
 if ($rows > 0) {
   $number = 0;
   $jumlah_sks = 0;
-  foreach ($db->frs_frs_mhs->where("is_active", "".$status."")->where("id_mhs","".$id_mhs["id_mhs"]."") as $transkrip) {
+  foreach ($db->frs_frs_mhs->where("is_active", "".$status."")->where("id_mhs","".$id_mhs["id_mhs"]."")->order("id_matkul")->order("id_tajar") as $transkrip) {
     $number++;
     $matkul = $db->frs_matkul->where("id_matkul", $transkrip["id_matkul"])->fetch();
     $mhs = $db->frs_mahasiswa->where("id_mhs", $transkrip["id_mhs"])->fetch();
     $jumlah_sks += $matkul["jml_sks"];
+    $tajar = $db->frs_tajar->where("id_tajar", $transkrip["id_tajar"])->fetch();
     $data_mhs = '<h3 class="pull-left" id="nama-mhs">' .$mhs["nama_mhs"]. '</h3><h3 class="pull-right" id="jml-sks">Jumlah SKS : '.$jumlah_sks.'</h3>';
     $data .= '<tbody><tr>
     <td>'.$number.'</td>
     <td>'.$matkul["kode_matkul"].'</td>
     <td>'.$matkul["nama_matkul"].'</td>
     <td>'.$matkul["jml_sks"].'</td>
+    <td>'.$tajar["nama_tajar"].'</td>
     </tr></tbody>';
   }
 } else {

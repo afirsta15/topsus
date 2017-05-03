@@ -31,7 +31,7 @@ function cetakFrs(id) {
   var clone = elem.cloneNode(true);
   $(clone).attr("id", "clone")
   document.getElementById("table-holder").appendChild(clone);
-  $('#clone tr').find('th:last-child, td:last-child').remove();
+  //$('#clone tr').find('th:last-child, td:last-child').remove();
 
 
   // Print to PDF
