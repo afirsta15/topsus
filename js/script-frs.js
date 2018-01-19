@@ -3,6 +3,8 @@ function addRecord() {
     // get values
     var select_mhs = $("#select-mhs").val();
     var add_matkul = $("#add-matkul").val();
+    var kurikulum = $("#kurikulum").val();
+    console.log(add_matkul);
 
     // Add record
     $.post("../controller/frs_addRecord.php", {
@@ -12,7 +14,7 @@ function addRecord() {
         if (data == 0) {
           // close the popup
           //$("#add-form-mhs-modal").modal("hide");
-          alert("Mata Kuliah dengan Kode : "+add_matkul+" sudah ada dalam KRS!");
+          alert("Mata Kuliah dengan Kode : "+add_matkul+" pada Kurikulum : "+kurikulum+" sudah ada dalam KRS!");
           readRecords();
         }  /* else if (data == 1) {
           alert("Anda mengulang mata kuliah dengan kode : "+add_matkul);

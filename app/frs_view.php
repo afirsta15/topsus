@@ -1,5 +1,6 @@
 <?php include '../config/DbConnect.php';
 $aktif = $db->frs_tajar->where("is_active", "1")->fetch();
+$kur = $db->frs_kurikulum->where("is_active", "1")->fetch();
 $mhs = $db->frs_mahasiswa->where("is_active", "1");
 ?>
 <html>
@@ -40,6 +41,7 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
                 <li><a href="../app/dosen_view.php">Master Dosen</a></li>
                 <li><a href="../app/matkul_view.php">Master Mata Kuliah</a></li>
                 <li><a href="../app/tajar_view.php">Master Tahun Ajar</a></li>
+                <li><a href="../app/kurikulum_view.php">Master Kurikulum</a></li>
               </ul>
             </li>
           </ul>
@@ -71,6 +73,7 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
           </div>
           <div class="pull-right">
             <label for="tajar" id="tajar">Tahun Ajar Aktif : <?php echo $aktif["nama_tajar"]; ?></label>
+            <label hidden for="Kurikulum" id="kurikulum"><?php echo $kur["nama_kurikulum"]; ?></label>
           </div>
           <div id="table-holder">
             <div class="records_frs" style="margin-top:50px; margin-bottom:50px;"></div>

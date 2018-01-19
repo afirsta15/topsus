@@ -1,3 +1,4 @@
+<!-- File matkul_view.php -->
 <?php include '../config/DbConnect.php'; ?>
 <html>
   <head>
@@ -37,6 +38,7 @@
                 <li><a href="../app/dosen_view.php">Master Dosen</a></li>
                 <li><a href="../app/matkul_view.php">Master Mata Kuliah</a></li>
                 <li><a href="../app/tajar_view.php">Master Tahun Ajar</a></li>
+                <li><a href="../app/kurikulum_view.php">Master Kurikulum</a></li>
               </ul>
             </li>
           </ul>
@@ -83,6 +85,23 @@
               <label for="jml_sks">Jumlah SKS:</label>
               <input type="number" class="form-control" name="jml_sks" id="jml_sks" onclick="doubleCheckKODE()" />
             </div>
+            <div class="form-group">
+              <label for="kurikulum">Kurikulum:</label>
+              <select class="form-control" name="kurikulum" id="kurikulum">
+                <?php
+                  $rows = count($db->frs_kurikulum());
+                  //echo $rows;
+                  if ($rows > 0) {
+                    foreach ($db->frs_kurikulum() as $kurikulum) {
+                      $data = '<option>'.$kurikulum["nama_kurikulum"].'</option>';
+                      echo $data;
+                    }
+                  } else {
+                      echo '<option>Kosong</option>';
+                  }
+                ?>
+              </select>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -112,6 +131,23 @@
             <div class="form-group">
               <label for="jml_sks">Jumlah SKS:</label>
               <input type="text" class="form-control" name="edit_jml_sks" id="edit_jml_sks" />
+            </div>
+            <div class="form-group">
+              <label for="kurikulum">Kurikulum:</label>
+              <select class="form-control" name="edit_kurikulum" id="edit_kurikulum">
+                <?php
+                  $rows = count($db->frs_kurikulum());
+                  //echo $rows;
+                  if ($rows > 0) {
+                    foreach ($db->frs_kurikulum() as $kurikulum) {
+                      $data = '<option>'.$kurikulum["nama_kurikulum"].'</option>';
+                      echo $data;
+                    }
+                  } else {
+                      echo '<option>Kosong</option>';
+                  }
+                ?>
+              </select>
             </div>
           </div>
           <div class="modal-footer">

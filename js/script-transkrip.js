@@ -1,3 +1,5 @@
+/* File script-transkrip.js */
+
 // Read Transkrip
 function readRecords() {
   var select_mhs = $("#select-mhs").val();
@@ -37,11 +39,12 @@ function cetakFrs(id) {
   // Print to PDF
   var res = doc.autoTableHtmlToJson(clone);
   doc.autoTable(res.columns, res.data, {
+    startX: 10,
     startY: 55,
-    tableWidth: 100,
-    margin: 55,
+    tableWidth: 200,
+    margin: 5,
     styles: {
-      cellPadding: 1.0,
+      cellPadding: 0.5,
       fontSize: 10,
       halign: 'center',
       valign: 'middle',

@@ -21,7 +21,8 @@ $data = '
 
 $id_tajar_aktif = $db->frs_tajar->where("is_active", "".$status."")->fetch();
 $id_mhs = $db->frs_mahasiswa->where("nrp", "".$raw_mhs[0]."")->fetch();
-$list_matkul = $db->frs_matkul->where("is_active", "".$status."");
+$kur = $db->frs_kurikulum->where("is_active", "1")->fetch();
+$list_matkul = $db->frs_matkul->where("id_kurikulum", "".$kur["id_kurikulum"]."")->where("is_active", "".$status."");
 
 $rows = count($db->frs_frs_mhs());
 //echo $rows;

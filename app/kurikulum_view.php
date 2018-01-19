@@ -1,6 +1,7 @@
-<?php include '../config/DbConnect.php';
-$aktif = $db->frs_tajar->where("is_active", "1")->fetch();
-$mhs = $db->frs_mahasiswa->where("is_active", "1");
+<!-- File kurikulum_view.php -->
+<?php
+include '../config/DbConnect.php';
+$aktif = $db->frs_kurikulum->where("is_active", "1")->fetch();
 ?>
 <html>
   <head>
@@ -13,7 +14,7 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
     <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-    <title>Tugas Topik Khusus | Formulir Rencana Studi</title>
+    <title>Tugas Topik Khusus | Kurikulum Aktif</title>
   </head>
   <body>
     <!-- Navbar -->
@@ -32,7 +33,7 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
           <ul class="nav navbar-nav">
             <li><a href="../app/index.php">Home</a></li>
             <li><a href="../app/frs_view.php">FRS</a></li>
-            <li class="active"><a href="../app/transkrip_view.php">Transkrip</a></li>
+            <li><a href="../app/transkrip_view.php">Transkrip</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -50,38 +51,38 @@ $mhs = $db->frs_mahasiswa->where("is_active", "1");
 
     <div class="container">
       <div class="page-header">
-        <h1>Transkrip</h1>
+        <h1 id="kurikulumTitle">Kurikulum : <?php echo $aktif["nama_kurikulum"]; ?></h1>
       </div>
 
-      <div>
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <div class="pull-left">
-            <form class="form-inline">
+      <div class="col-md-4" style="margin-bottom:20px">
+        <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-kurikulum-modal">Tambah</button>
+      </div>
+      <div class="col-md-12 select_kurikulum"></div>
+
+      <!-- Add Form Tajar Modal -->
+      <div class="modal fade" id="add-form-kurikulum-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Tambah Tahun Ajar</h4>
+            </div>
+            <div class="modal-body">
               <div class="form-group">
-                <select class="form-control" name="select-mhs" id="select-mhs" style="width:300px">
-                  <?php
-                    foreach ($mhs as $m) {
-                      echo "<option>".$m["nrp"]." - ".$m["nama_mhs"]."</option>";
-                    }
-                  ?>
-                </select>
+                <label for="add_nama_kurikulum">Nama Kurikulum :</label>
+                <input type="text" class="form-control" name="add_nama_kurikulum" id="add_nama_kurikulum" />
               </div>
-              <button type="button" class="btn btn-success" onclick="readRecords()">Pilih</button>
-            </form>
-          </div>
-          <div id="table-holder">
-            <div class="records_transkrip" style="margin-top:50px; margin-bottom:50px;"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-success" onclick="addRecord()">Tambah</button>
+            </div>
           </div>
         </div>
-        <div class="col-md-2"></div>
       </div>
+
     </div>
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js"></script>
-    <script src="../js/script-transkrip.js"></script>
+    <script src="../js/script-set-kurikulum.js"></script>
   </body>
 </html>

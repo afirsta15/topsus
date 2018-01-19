@@ -1,3 +1,4 @@
+<!-- File matkul_readRecord.php -->
 <?php
 include '../config/DbConnect.php' ;
 
@@ -11,6 +12,7 @@ $data = '
       <th>Kode</th>
       <th>Nama</th>
       <th>Jumlah SKS</th>
+      <th>Kurikulum</th>
       <th></th>
     </tr>
   </thead>
@@ -22,12 +24,14 @@ if ($rows > 0) {
   $number = 0;
   foreach ($db->frs_matkul->where("is_active", "".$status."") as $matkul) {
     // $convertDate = date('d-m-Y', strtotime($mhs["tgl_lahir"]));
+    $kurikulum = $db->frs_kurikulum->where("id_kurikulum", $matkul["id_kurikulum"])->fetch();
     $number++;
     $data .= '<tbody><tr>
     <td>'.$number.'</td>
     <td>'.$matkul["kode_matkul"].'</td>
     <td>'.$matkul["nama_matkul"].'</td>
     <td>'.$matkul["jml_sks"].'</td>
+    <td>'.$kurikulum["nama_kurikulum"].'</td>
     <td>
       <button type="button" onclick="GetMatkulDetails('.$matkul["id_matkul"].')" class="btn btn-sm btn-warning">Edit</button>
       <button type="button" onclick="DeleteMatkul('.$matkul["id_matkul"].')" class="btn btn-sm btn-danger">Delete</button>

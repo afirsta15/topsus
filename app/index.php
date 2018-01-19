@@ -37,6 +37,7 @@
                 <li><a href="../app/dosen_view.php">Master Dosen</a></li>
                 <li><a href="../app/matkul_view.php">Master Mata Kuliah</a></li>
                 <li><a href="../app/tajar_view.php">Master Tahun Ajar</a></li>
+                <li><a href="../app/kurikulum_view.php">Master Kurikulum</a></li>
               </ul>
             </li>
           </ul>

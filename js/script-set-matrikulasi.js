@@ -1,40 +1,30 @@
-/* File script-matkul.js */
 // Add Record
 function addRecord() {
     // get values
-    var kode_matkul = $("#kode_matkul").val();
-    var nama_matkul = $("#nama_matkul").val();
-    var jml_sks = $("#jml_sks").val();
-    var kurikulum = $("#kurikulum").val();
+    var old_matkul = $("#old_matkul").val();
+    var new_matkul = $("#new_matkul").val();
 
     // Add record
-    $.post("../controller/matkul_addRecord.php", {
-        kode_matkul: kode_matkul,
-        nama_matkul: nama_matkul,
-        jml_sks: jml_sks,
-        kurikulum: kurikulum
+    $.post("../controller/matrikulasi_addRecord.php", {
+        old_matkul: old_matkul,
+        new_matkul: new_matkul
     }, function (data, status) {
         if (data == 0) {
           // close the popup
           //$("#add-form-mhs-modal").modal("hide");
-          alert("Mata Kuliah dengan Kode : "+kode_matkul+" pada kurikulum "+kurikulum+" sudah ada!");
+          alert("Mata Kuliah dengan Kode : "+old_matkul+" sudah pernah diganti dengan "+new_matkul+" !");
           readRecords();
         } else {
           // close the popup
-          $("#add-form-matkul-modal").modal("hide");
+          $("#add-form-matrikulasi-modal").modal("hide");
           // read records again
           readRecords();
-
-          // clear fields from the popup
-          $("#kode_matkul").val("");
-          $("#nama_matkul").val("");
-          $("#jml_sks").val("");
         }
     });
 }
 function readRecords() {
-    $.get("../controller/matkul_readRecord.php", {}, function (data, status) {
-        $(".records_matkul").html(data);
+    $.get("../controller/matrikulasi_readRecord.php", {}, function (data, status) {
+        $(".records_matrikulasi").html(data);
     });
 }
 
@@ -108,44 +98,44 @@ function DeleteMatkul(id) {
     }
 }
 
-function filterRecord() {
-  // Declare variables
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("recordFilter");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("records_matkul");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-
-function ResetIsEdit() {
-    StartInterval();
-    // get values
-    var id = $("#id_matkul").val();
-
-    // Update the details by requesting to the server using ajax
-    $.post("../controller/matkul_resetIsEdit.php", {
-            id_matkul : id
-        },
-        function (data, status) {
-            // hide modal popup
-            $("#edit-form-matkul-modal").modal("hide");
-            // reload Users by using readRecords();
-            readRecords();
-        }
-    );
-}
+// function filterRecord() {
+//   // Declare variables
+//   var input, filter, table, tr, td, i;
+//   input = document.getElementById("recordFilter");
+//   filter = input.value.toUpperCase();
+//   table = document.getElementById("records_matkul");
+//   tr = table.getElementsByTagName("tr");
+//
+//   // Loop through all table rows, and hide those who don't match the search query
+//   for (i = 0; i < tr.length; i++) {
+//     td = tr[i].getElementsByTagName("td")[2];
+//     if (td) {
+//       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+//         tr[i].style.display = "";
+//       } else {
+//         tr[i].style.display = "none";
+//       }
+//     }
+//   }
+// }
+//
+// function ResetIsEdit() {
+//     StartInterval();
+//     // get values
+//     var id = $("#id_matkul").val();
+//
+//     // Update the details by requesting to the server using ajax
+//     $.post("../controller/matkul_resetIsEdit.php", {
+//             id_matkul : id
+//         },
+//         function (data, status) {
+//             // hide modal popup
+//             $("#edit-form-matkul-modal").modal("hide");
+//             // reload Users by using readRecords();
+//             readRecords();
+//         }
+//     );
+// }
 
 function StartInterval() {
   interval = setInterval(function() {
@@ -199,7 +189,7 @@ $(document).ready(function () {
     StartInterval();
     // READ recods on page load
     readRecords(); // calling function
-    checkKODE();
+    //checkKODE();
 
     // $(function(){
     //   $('#datepicker').datetimepicker({

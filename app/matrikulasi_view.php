@@ -1,6 +1,9 @@
 <?php
 include '../config/DbConnect.php';
-$aktif = $db->frs_tajar->where("is_active", "1")->fetch();
+$kurikulum = $db->frs_kurikulum->where("is_active", "1")->fetch();
+$old_kurikulum = $kurikulum["id_kurikulum"] - 1;
+$old = $db->frs_matkul->where("is_active", "1")->where("id_kurikulum", $old_kurikulum);
+$new = $db->frs_matkul->where("is_active", "1")->where("id_kurikulum", $kurikulum["id_kurikulum"]);
 ?>
 <html>
   <head>
@@ -13,7 +16,7 @@ $aktif = $db->frs_tajar->where("is_active", "1")->fetch();
     <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-    <title>Tugas Topik Khusus | Tahun Ajar</title>
+    <title>Tugas Topik Khusus | Kurikulum Aktif</title>
   </head>
   <body>
     <!-- Navbar -->
@@ -41,6 +44,7 @@ $aktif = $db->frs_tajar->where("is_active", "1")->fetch();
                 <li><a href="../app/matkul_view.php">Master Mata Kuliah</a></li>
                 <li><a href="../app/tajar_view.php">Master Tahun Ajar</a></li>
                 <li><a href="../app/kurikulum_view.php">Master Kurikulum</a></li>
+                <li><a href="../app/matrikulasi_view.php">Master Matrikulasi</a></li>
               </ul>
             </li>
           </ul>
@@ -50,33 +54,56 @@ $aktif = $db->frs_tajar->where("is_active", "1")->fetch();
 
     <div class="container">
       <div class="page-header">
-        <h1 id="tajarTitle">Tahun Ajar : <?php echo $aktif["nama_tajar"]; ?></h1>
+        <h1 id="kurikulumTitle">Matrikulasi Mata Kuliah Kurikulum : <?php echo $kurikulum["nama_kurikulum"]; ?></h1>
       </div>
 
       <div class="col-md-4" style="margin-bottom:20px">
-        <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-tajar-modal">Tambah</button>
+        <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#add-form-matrikulasi-modal">Matrikulasi</button>
       </div>
-      <div class="col-md-12 select_tajar"></div>
+      <div class="records_matrikulasi"></div>
 
-      <!-- Add Form Tajar Modal -->
-      <div class="modal fade" id="add-form-tajar-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+      <!-- Add Form Matrikulasi Modal -->
+      <div class="modal fade" id="add-form-matrikulasi-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Tambah Mata Kuliah</h4>
+              <h4 class="modal-title">Lakukan Matrikulasi</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="periode_tajar">Periode :</label>
-                <select class="form-control" name="periode_tajar" id="periode_tajar">
-                  <option>Gasal</option>
-                  <option>Genap</option>
+                <label for="kurikulum">Mata Kuliah Lama:</label>
+                <select class="form-control" name="old_matkul" id="old_matkul">
+                  <?php
+                    $rows = count($db->frs_matkul());
+                    //echo $rows;
+                    if ($rows > 0) {
+                      foreach ($old as $old_matkul) {
+                        $data = '<option>'.$old_matkul["nama_matkul"].'</option>';
+                        echo $data;
+                      }
+                    } else {
+                        echo '<option>Kosong</option>';
+                    }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
-                <label for="tahun_tajar">Tahun :</label>
-                <input type="text" class="form-control" name="tahun_tajar" id="tahun_tajar" />
+                <label for="kurikulum">Mata Kuliah Baru:</label>
+                <select class="form-control" name="new_matkul" id="new_matkul">
+                  <?php
+                    $rows = count($db->frs_matkul());
+                    //echo $rows;
+                    if ($rows > 0) {
+                      foreach ($new as $new_matkul) {
+                        $data = '<option>'.$new_matkul["nama_matkul"].'</option>';
+                        echo $data;
+                      }
+                    } else {
+                        echo '<option>Kosong</option>';
+                    }
+                  ?>
+                </select>
               </div>
             </div>
             <div class="modal-footer">
@@ -89,6 +116,6 @@ $aktif = $db->frs_tajar->where("is_active", "1")->fetch();
 
     </div>
 
-    <script src="../js/script-set-tajar.js"></script>
+    <script src="../js/script-set-matrikulasi.js"></script>
   </body>
 </html>
